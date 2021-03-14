@@ -1,7 +1,5 @@
-import React from "react";
-import Link from "next/link";
+ import React from "react";
 import Router from "next/router";
-import Head from "next/head";
 import {MainLayout} from "../../components/MainLayout";
 
 export default class Posts extends React.Component{
@@ -11,10 +9,7 @@ export default class Posts extends React.Component{
 
     render() {
         return (
-            <MainLayout>
-                <Head>
-                    <title>Next title index hello</title>
-                </Head>
+            <MainLayout title="Posts page">
                 <h1>
                     Posts page
                 </h1>

@@ -14,11 +14,7 @@ export default class About extends React.Component{
     }
     render() {
         return (
-            <MainLayout>
-                <Head>
-                    <title>Next title index hello</title>
-                    <meta charSet="utf-8"/>
-                </Head>
+            <MainLayout title="About page">
                 <h1>
                     About page
                 </h1>
