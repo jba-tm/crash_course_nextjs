@@ -1,11 +1,31 @@
- import React from "react";
+import React from "react";
 import Router from "next/router";
+import Link from 'next/link'
 import {MainLayout} from "../../components/MainLayout";
+import axios from "axios";
 
-export default class Posts extends React.Component{
-    handleClick(e){
-        Router.push('/')
-    }
+export default class Posts extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //
+    //     this.state = {
+    //         posts: []
+    //     }
+    // }
+
+    // componentDidMount() {
+    //     axios.get('http://localhost:4200/posts')
+    //         .then(response => {
+    //             console.log(response.data)
+    //             this.setState({
+    //                 posts: response.data
+    //             })
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }
+
 
     render() {
         return (
@@ -13,14 +33,63 @@ export default class Posts extends React.Component{
                 <h1>
                     Posts page
                 </h1>
-
-                <button onClick={this.handleClick}>
-                    Go back to home
-                </button>
-                <button onClick={()=>Router.push('/about')}>
-                    Go to about
-                </button>
+                <ul>
+                    {this.props.posts.map(post=>(
+                        <li key={post.id}><Link href={`/posts/[id]`} as={`/posts/${post.id }`}><a>{post.title}</a></Link></li>
+                    ))}
+                </ul>
             </MainLayout>
-            );
+        );
+    }
+
+    // static async getInitialProps() {
+    //     const response = await axios.get('http://localhost:4200/posts')
+    //     const posts = await response.data
+    //     console.log(response.data)
+    //     return {
+    //         props: {
+    //             posts
+    //         }
+    //     }
+    // }
+}
+
+
+export async function getStaticProps() {
+// export async function getStaticProps() {
+    const response = await axios.get('http://localhost:4200/posts')
+    //
+    // .then(response => {
+    //     console.log(response.data)
+    //     posts = response.data
+    // })
+    // .catch(error => {
+    //     console.log(error);
+    // })
+
+    const posts = response.data
+
+    return {
+        props: {
+            posts
+        }
     }
 }
+
+// Posts.getInitialProps = async () => {
+//
+//     const response = axios.get('http://localhost:4200/posts')
+//     // .then(response => {
+//     //     console.log(response.data)
+//     //     this.setState({
+//     //         posts: response.data
+//     //     })
+//     // })
+//     // .catch(error => {
+//     //     console.log(error);
+//     // })
+//     const posts = response.data
+//     return {
+//         posts: posts
+//     }
+// }
