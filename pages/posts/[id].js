@@ -7,23 +7,39 @@ class Post extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            serverPost: []
+            post: null
         }
     }
 
     componentDidMount() {
-
+        axios.get(`http://localhost:4200/posts/${this.props.router.query.id}`)
+            .then(response=>{
+                this.setState({
+                    post: response.data
+                })
+            })
+            .catch(error=>{
+                console.log(error)
+            })
     }
 
     render() {
-
+        if(this.state.post===null){
+            return (
+                <MainLayout>
+                    <p>
+                        ...Loading
+                    </p>
+                </MainLayout>
+            )
+        }
         return (
             <MainLayout>
                 <h1>
-                    Posts {this.props.post.title}
+                    Posts {this.state.post.title}
                 </h1>
                 <p>
-                    {this.props.post.body}
+                    {this.state.post.body}
                 </p>
             </MainLayout>
         );
@@ -49,6 +65,13 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps({params}) {
+    // if(!req){
+    //     return {
+    //         props:{
+    //             post: null
+    //         }
+    //     }
+    // }
     const response = await axios.get(`http://localhost:4200/posts/${params.id}`)
     return {
         props: {
