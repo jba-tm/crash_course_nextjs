@@ -2,7 +2,9 @@ import React from "react"
 import Link from "next/link";
 import Head from "next/head";
 
-export class MainLayout extends React.Component {
+export class MainLayout extends React.Component<{
+    title: string
+}> {
     static defaultProps = {
         title: "Next App"
     }

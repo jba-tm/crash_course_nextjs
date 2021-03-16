@@ -10,14 +10,14 @@ export default function Home() {
                 Index page
             </h1>
             <p>
-                <Link href="/about">
+                <Link href={'/about'}>
                     <a>
                         About
                     </a>
                 </Link>
             </p>
             <p>
-                <Link href="/posts">
+                <Link href={"/posts"}>
                     <a>
                         Posts
                     </a>

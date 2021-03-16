@@ -1,6 +1,17 @@
 {
   "posts": [
-    { "id": 1, "title": "Title 1", "body": "typicode" },
-    { "id": 2, "title": "Title 2", "body": "typicode" }
-  ]
+    {
+      "id": 1,
+      "title": "Title 1",
+      "body": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "Title 2",
+      "body": "typicode"
+    }
+  ],
+  "about": {
+    "title": "About us page"
+  }
 }

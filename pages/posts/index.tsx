@@ -1,10 +1,10 @@
 import React from "react";
-import Router from "next/router";
 import Link from 'next/link'
 import {MainLayout} from "../../components/MainLayout";
 import axios from "axios";
+import {IPosts} from "../../interfaces/iPost";
 
-export default class Posts extends React.Component {
+export default class Posts extends React.Component<IPosts> {
     // constructor(props) {
     //     super(props);
     //
