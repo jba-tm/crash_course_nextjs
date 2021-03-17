@@ -1,7 +1,9 @@
 import React from "react"
 import {MainLayout} from "../../components/MainLayout";
 import axios from "axios";
-import {IAbout} from "../../interfaces/iAbout";
+import {IAbout} from "../../interfaces/IAbout";
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+
 
 export default class About extends React.Component<IAbout>{
     render() {
@@ -15,8 +17,9 @@ export default class About extends React.Component<IAbout>{
     }
 }
 
-export async function getStaticProps(){
-    const response = await axios.get('http://localhost:4200/about')
+
+export const getStaticProps: GetStaticProps = async () => {
+        const response = await axios.get(`${process.env.API_URL }/about`)
 
     const about = response.data
 

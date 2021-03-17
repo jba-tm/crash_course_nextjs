@@ -2,20 +2,21 @@ import React from "react";
 import {withRouter} from "next/router";
 import {MainLayout} from "../../components/MainLayout";
 import axios from "axios";
-import {GetStaticProps, GetStaticPaths, GetServerSideProps} from 'next'
-import {IPost} from "../../interfaces/iPost";
+import {GetStaticProps, GetStaticPaths} from 'next'
+import {IPost} from "../../interfaces/IPost";
 
 
 class Post extends React.Component<IPost> {
 
     render() {
+        const post = this.props.post
         return (
             <MainLayout>
                 <h1>
-                    Posts {this.props.post.title}
+                    Posts {post.title}
                 </h1>
                 <p>
-                    {this.props.post.body}
+                    {post.body}
                 </p>
             </MainLayout>
         );
@@ -23,7 +24,7 @@ class Post extends React.Component<IPost> {
 }
 
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
     const response = await axios.get(`http://localhost:4200/posts`)
     const paths = response.data.map(post => (
             {
@@ -40,8 +41,8 @@ export async function getStaticPaths() {
 }
 
 
-export const getStaticProps: GetStaticProps = async params => {
-    const response = await axios.get(`http://localhost:4200/posts/${params.id}`)
+export const getStaticProps: GetStaticProps = async ({params}) => {
+    const response = await axios.get(`${process.env.API_URL }/posts/${params.id}`)
     return {
         props: {
             post: response.data

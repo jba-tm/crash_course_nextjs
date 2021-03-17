@@ -2,36 +2,15 @@ import React from "react";
 import Link from 'next/link'
 import {MainLayout} from "../../components/MainLayout";
 import axios from "axios";
-import {IPosts} from "../../interfaces/iPost";
+import {IPosts} from "../../interfaces/IPost";
+import { GetStaticProps } from 'next'
 
 export default class Posts extends React.Component<IPosts> {
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.state = {
-    //         posts: []
-    //     }
-    // }
-
-    // componentDidMount() {
-    //     axios.get('http://localhost:4200/posts')
-    //         .then(response => {
-    //             console.log(response.data)
-    //             this.setState({
-    //                 posts: response.data
-    //             })
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    // }
-
-
     render() {
         return (
             <MainLayout title="Posts page">
                 <h1>
-                    Posts page
+                     Posts page
                 </h1>
                 <ul>
                     {this.props.posts.map(post=>(
@@ -41,31 +20,11 @@ export default class Posts extends React.Component<IPosts> {
             </MainLayout>
         );
     }
-
-    // static async getInitialProps() {
-    //     const response = await axios.get('http://localhost:4200/posts')
-    //     const posts = await response.data
-    //     console.log(response.data)
-    //     return {
-    //         props: {
-    //             posts
-    //         }
-    //     }
-    // }
 }
 
 
-export async function getStaticProps() {
-// export async function getStaticProps() {
-    const response = await axios.get('http://localhost:4200/posts')
-    //
-    // .then(response => {
-    //     console.log(response.data)
-    //     posts = response.data
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // })
+export const getStaticProps: GetStaticProps = async () => {
+    const response = await axios.get(`${process.env.API_URL }/posts`)
 
     const posts = response.data
 
@@ -75,21 +34,3 @@ export async function getStaticProps() {
         }
     }
 }
-
-// Posts.getInitialProps = async () => {
-//
-//     const response = axios.get('http://localhost:4200/posts')
-//     // .then(response => {
-//     //     console.log(response.data)
-//     //     this.setState({
-//     //         posts: response.data
-//     //     })
-//     // })
-//     // .catch(error => {
-//     //     console.log(error);
-//     // })
-//     const posts = response.data
-//     return {
-//         posts: posts
-//     }
-// }
